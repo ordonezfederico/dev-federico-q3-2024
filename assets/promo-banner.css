@@ -1,0 +1,13 @@
+.promo-banner {
+  display: none;
+  position: relative;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+}
+.promo-banner__close {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}

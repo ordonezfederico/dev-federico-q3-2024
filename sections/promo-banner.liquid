@@ -1,0 +1,70 @@
+{{ 'promo-banner.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #promo-banners .promo-banner {
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+{%- endstyle -%}
+
+<div id="promo-banners">
+  {% for block in section.blocks %}
+  <div class="promo-banner" data-utm-medium="{{ block.settings.utm_medium }}" data-discount-code="{{ block.settings.discount_code | downcase }}">
+    <span class="promo-message">{{ block.settings.message }}</span>
+    <span class="promo-banner__close">×</span>
+  </div>
+  {% endfor %}
+</div>
+
+<script src="{{ 'promo-banner.js' | asset_url }}" defer></script>
+
+
+{% schema %}
+  {
+    "name": "Promo Banners",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#F3F3F3"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#000000"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "promo_banner",
+        "name": "Promo Banner",
+        "settings": [
+          {
+            "type": "text",
+            "id": "message",
+            "label": "Message",
+            "default": "Your 15% off discount code WELCOME15 will auto-apply at checkout."
+          },
+          {
+            "type": "text",
+            "id": "utm_medium",
+            "label": "UTM Medium"
+          },
+          {
+            "type": "text",
+            "id": "discount_code",
+            "label": "Discount Code"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo Banners",
+        "category": "Custom"
+      }
+    ]
+  }
+  {% endschema %}
